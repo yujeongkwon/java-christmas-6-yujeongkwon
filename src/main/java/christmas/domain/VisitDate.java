@@ -3,15 +3,18 @@ package christmas.domain;
 import static christmas.exception.ExceptionMessage.INVALID_ORDER;
 
 public class VisitDate {
+    private static final int START_MONTH = 1;
+    private static final int END_MONTH = 31;
+
     private final int date;
 
     public VisitDate(String input) {
         int inputDate = convertStringToInt(input);
-        validate(inputDate);
+        validateNumberRange(inputDate);
         this.date = inputDate;
     }
 
-    public static int convertStringToInt(final String input) {
+    private int convertStringToInt(final String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -19,7 +22,10 @@ public class VisitDate {
         }
     }
 
-    private void validate(int input) {
+    private void validateNumberRange(int input) {
+        if (input < START_MONTH || input > END_MONTH) {
+            throw new IllegalArgumentException(INVALID_ORDER.get());
+        }
     }
 
 
