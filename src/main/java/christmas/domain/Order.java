@@ -12,12 +12,10 @@ import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 public class Order {
     private static final int AVAILABLE_DISCOUNT_MIN_AMOUNT= 10000;
 
-    private LocalDate visitDate;
     private List<OrderedFood> orderedFoods = new ArrayList<>();
 
-    public Order(LocalDate visitDate, List<OrderedFood> orderedFoods) {
+    public Order(List<OrderedFood> orderedFoods) {
         validate(orderedFoods);
-        this.visitDate = visitDate;
         this.orderedFoods = orderedFoods;
     }
 

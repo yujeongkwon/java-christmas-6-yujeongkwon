@@ -42,7 +42,7 @@ public class ChristmasController {
     private Order readOrder() {
         try {
             List<OrderedFood> orderedFoods = processOrder(InputView.readOrder());
-            return new Order(visitDate, orderedFoods);
+            return new Order(orderedFoods);
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
             return readOrder();
