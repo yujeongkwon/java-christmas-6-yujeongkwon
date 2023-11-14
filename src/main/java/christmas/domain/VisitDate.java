@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.exception.ExceptionMessage.INVALID_ORDER;
+import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 
 public class VisitDate {
     private static final int START_MONTH = 1;

@@ -1,11 +1,10 @@
 package christmas.domain;
 
-import christmas.exception.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static christmas.exception.ExceptionMessage.INVALID_ORDER;
+import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
