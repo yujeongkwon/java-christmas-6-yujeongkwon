@@ -28,7 +28,14 @@ public class Order {
                 .sum();
     }
 
-    public int countDessert() {
+    public int getMainMenuCount() {
+        return orderedFoods.stream()
+                .filter(food -> Menu.findCategoryByFoodName((String) food.getName()).equals(Menu.MAIN))
+                .mapToInt(OrderedFood::getQuantity)
+                .sum();
+    }
+
+    public int getDessertMenuCount() {
         return orderedFoods.stream()
                 .filter(food -> Menu.findCategoryByFoodName((String) food.getName()).equals(Menu.DESSERT))
                 .mapToInt(OrderedFood::getQuantity)
