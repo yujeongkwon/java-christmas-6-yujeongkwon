@@ -70,4 +70,27 @@ class OrderTest {
         //then
         assertThat(exception.getMessage()).isEqualTo(ExceptionMessage.INVALID_ORDER.get());
     }
+
+    @DisplayName("총 금액 계산")
+    @Test
+    void getTotalPrice() {
+        //given
+        List<OrderedFood> orderedFoods = List.of(
+                new OrderedFood("제로콜라", 10),
+                new OrderedFood("레드와인", 3),
+                new OrderedFood("시저샐러드", 3)
+        );
+
+        LocalDate visitDate = LocalDate.of(2023, 12, 2);
+        Order order = new Order(visitDate, orderedFoods);
+
+        //when
+        int result = order.getTotalPrice();
+
+        //then
+        assertThat(result).isEqualTo(
+                Menu.findFoodByName("제로콜라").get().getPrice() * 10
+                + Menu.findFoodByName("레드와인").get().getPrice() * 3
+                + Menu.findFoodByName("시저샐러드").get().getPrice() * 3);
+    }
 }

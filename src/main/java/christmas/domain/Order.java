@@ -19,6 +19,12 @@ public class Order {
         this.orderedFoods = orderedFoods;
     }
 
+    public int getTotalPrice(){
+        return orderedFoods.stream()
+                .mapToInt(OrderedFood::getFoodsPrice)
+                .sum();
+    }
+
     private void validate(List<OrderedFood> orderedFoods) {
         validateDuplicateMenu(orderedFoods);
         validateTotalMenuCount(orderedFoods);

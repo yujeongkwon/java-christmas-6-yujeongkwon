@@ -35,6 +35,10 @@ public class OrderedFood {
         return optionalFood.get();
     }
 
+    public int getFoodsPrice(){
+        return food.getPrice() * quantity;
+    }
+
     public Object getName() {
         return food.getName();
     }
