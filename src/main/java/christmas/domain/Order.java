@@ -28,6 +28,13 @@ public class Order {
                 .sum();
     }
 
+    public int countDessert() {
+        return orderedFoods.stream()
+                .filter(food -> Menu.findCategoryByFoodName((String) food.getName()).equals(Menu.DESSERT))
+                .mapToInt(OrderedFood::getQuantity)
+                .sum();
+    }
+
     private void validate(List<OrderedFood> orderedFoods) {
         validateDuplicateMenu(orderedFoods);
         validateTotalMenuCount(orderedFoods);
