@@ -35,8 +35,10 @@ class ChristmasDayDiscountStrategyTest {
         ChristmasDayDiscountStrategy christmasDayDiscountStrategy = new ChristmasDayDiscountStrategy();
 
         //when
-        int result = christmasDayDiscountStrategy.calculateDiscount(localDate, order);
-
+        int result = 0;
+        if (christmasDayDiscountStrategy.isApplicable(localDate, order)){
+            result = christmasDayDiscountStrategy.calculateDiscount(localDate, order);
+        }
         //then
         assertThat(result).isEqualTo(-3400);
     }
