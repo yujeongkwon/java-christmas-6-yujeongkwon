@@ -1,6 +1,8 @@
 package christmas.domain;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public enum Menu {
     APPETIZER("애피타이저", List.of(
@@ -32,5 +34,11 @@ public enum Menu {
         this.foods = foods;
     }
 
+    public static Optional<Food> findFoodByName(String foodName) {
+        return Stream.of(Menu.values())
+                .flatMap(menu -> menu.foods.stream())
+                .filter(food -> food.getName().equalsIgnoreCase(foodName))
+                .findFirst();
+    }
 
 }
