@@ -1,6 +1,8 @@
 package christmas.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -29,6 +31,16 @@ public enum Menu {
     private String categoryName;
     private List<Food> foods;
 
+    private static final Map<String, Menu> foodToMenu = new HashMap<>();
+
+    static {
+        for (Menu menu : Menu.values()) {
+            for (Food food : menu.foods) {
+                foodToMenu.put(food.getName(), menu);
+            }
+        }
+    }
+
     Menu(String categoryName, List<Food> foods) {
         this.categoryName = categoryName;
         this.foods = foods;
@@ -41,4 +53,11 @@ public enum Menu {
                 .findFirst();
     }
 
+    public static Menu findCategoryByFoodName(String foodName) {
+        return foodToMenu.get(foodName);
+    }
+
+    public String getCategoryName(){
+        return categoryName;
+    }
 }

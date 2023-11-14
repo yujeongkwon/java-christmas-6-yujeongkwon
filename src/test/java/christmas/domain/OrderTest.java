@@ -50,4 +50,24 @@ class OrderTest {
         //then
         assertThat(exception.getMessage()).isEqualTo(ExceptionMessage.INVALID_ORDER.get());
     }
+
+    @DisplayName("메뉴가 모두 음료라면 예외가 발생한다.")
+    @Test
+    void validateNotOnlyBeverage() {
+        //given
+        List<OrderedFood> orderedFoods = List.of(
+                new OrderedFood("제로콜라", 10),
+                new OrderedFood("레드와인", 3)
+        );
+
+        LocalDate visitDate = LocalDate.of(2023, 12, 2);
+
+        //when
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()-> {
+            new Order(visitDate, orderedFoods);
+        });
+
+        //then
+        assertThat(exception.getMessage()).isEqualTo(ExceptionMessage.INVALID_ORDER.get());
+    }
 }

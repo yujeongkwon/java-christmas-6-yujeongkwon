@@ -11,7 +11,7 @@ import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 
 public class Order {
     private LocalDate visitDate;
-    private List<OrderedFood> orderedFoods = new ArrayList<>();;
+    private List<OrderedFood> orderedFoods = new ArrayList<>();
 
     public Order(LocalDate visitDate, List<OrderedFood> orderedFoods) {
         validate(orderedFoods);
@@ -22,6 +22,7 @@ public class Order {
     private void validate(List<OrderedFood> orderedFoods) {
         validateDuplicateMenu(orderedFoods);
         validateTotalMenuCount(orderedFoods);
+        validateNotOnlyBeverage(orderedFoods);
     }
 
     private void validateDuplicateMenu(List<OrderedFood> orderedFoods) {
@@ -44,8 +45,14 @@ public class Order {
         }
     }
 
-    public void addOrderedItem(OrderedFood orderedFood) {
-        orderedFoods.add(orderedFood);
-    }
+    private void validateNotOnlyBeverage(List<OrderedFood> orderedFoods) {
+        Set<String> foodCategories = orderedFoods.stream()
+                .map(OrderedFood::getName)
+                .map(name -> Menu.findCategoryByFoodName((String) name).getCategoryName())
+                .collect(Collectors.toSet());
 
+        if (foodCategories.size() == 1 && foodCategories.contains(Menu.BEVERAGE.getCategoryName())) {
+            throw new IllegalArgumentException(INVALID_ORDER.get());
+        }
+    }
 }
