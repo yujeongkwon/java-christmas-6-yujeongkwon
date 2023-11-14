@@ -12,12 +12,12 @@ public class WeekdayDiscountStrategy implements DiscountStrategy {
 
     @Override
     public boolean isApplicable(LocalDate visitDate, Order order) {
-        return isWeekday(visitDate) && (order.countDessert() > 1);
+        return isWeekday(visitDate) && (order.getDessertMenuCount() > 1);
     }
 
     @Override
     public int calculateDiscount(LocalDate visitDate, Order order) {
-        int dessertCount = order.countDessert();
+        int dessertCount = order.getDessertMenuCount();
         return -(dessertCount * DISCOUNT_AMOUNT_PER_DESSERT);
     }
 
