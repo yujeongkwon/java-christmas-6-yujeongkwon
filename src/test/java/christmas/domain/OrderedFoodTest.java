@@ -50,9 +50,8 @@ class OrderedFoodTest {
                 new OrderedFood("아이스크림", 2)
         );
 
-        LocalDate visitDate = LocalDate.of(2023, 12, 2);
-        Order order = new Order(visitDate, orderedFoods);
-        Order order2 = new Order(visitDate, orderedFoods2);
+        Order order = new Order(orderedFoods);
+        Order order2 = new Order(orderedFoods2);
 
         //when
         boolean result = order.isAvailableDiscount();

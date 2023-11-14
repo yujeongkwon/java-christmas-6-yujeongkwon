@@ -4,7 +4,6 @@ import christmas.constans.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,11 +19,9 @@ class OrderTest {
                 new OrderedFood("제로콜라", 3)
         );
 
-        LocalDate visitDate = LocalDate.of(2023, 12, 2);
-
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()-> {
-            new Order(visitDate, orderedFoods);
+            new Order(orderedFoods);
         });
 
         //then
@@ -40,11 +37,9 @@ class OrderTest {
                 new OrderedFood("시저샐러드", 3)
         );
 
-        LocalDate visitDate = LocalDate.of(2023, 12, 2);
-
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()-> {
-            new Order(visitDate, orderedFoods);
+            new Order(orderedFoods);
         });
 
         //then
@@ -60,11 +55,9 @@ class OrderTest {
                 new OrderedFood("레드와인", 3)
         );
 
-        LocalDate visitDate = LocalDate.of(2023, 12, 2);
-
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()-> {
-            new Order(visitDate, orderedFoods);
+            new Order(orderedFoods);
         });
 
         //then
@@ -81,8 +74,7 @@ class OrderTest {
                 new OrderedFood("시저샐러드", 3)
         );
 
-        LocalDate visitDate = LocalDate.of(2023, 12, 2);
-        Order order = new Order(visitDate, orderedFoods);
+        Order order = new Order(orderedFoods);
 
         //when
         int result = order.getTotalPrice();
