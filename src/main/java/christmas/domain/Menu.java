@@ -47,6 +47,10 @@ public enum Menu {
     }
 
     public static Optional<Food> findFoodByName(String foodName) {
+        if (!foodToMenu.containsKey(foodName)){
+            return Optional.empty();
+        }
+
         return Stream.of(Menu.values())
                 .flatMap(menu -> menu.foods.stream())
                 .filter(food -> food.getName().equalsIgnoreCase(foodName))

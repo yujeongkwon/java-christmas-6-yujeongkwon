@@ -1,7 +1,5 @@
 package christmas.domain;
 
-import christmas.constans.Category;
-
 public class Food {
     private String name;
     private int price;
