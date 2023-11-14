@@ -34,4 +34,8 @@ public class OrderedFood {
 
         return optionalFood.get();
     }
+
+    public Object getName() {
+        return food.getName();
+    }
 }
