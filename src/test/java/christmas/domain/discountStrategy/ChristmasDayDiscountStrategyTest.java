@@ -17,7 +17,7 @@ class ChristmasDayDiscountStrategyTest {
 
     @BeforeEach
     void setup(){
-        localDate = LocalDate.of(2023,12,3);
+        localDate = LocalDate.of(2023,12,25);
 
         List<OrderedFood> orderedFoods = List.of(
                 new OrderedFood("아이스크림", 2),
@@ -38,6 +38,6 @@ class ChristmasDayDiscountStrategyTest {
         int result = christmasDayDiscountStrategy.calculateDiscount(localDate, order);
 
         //then
-        assertThat(result).isEqualTo(-1200);
+        assertThat(result).isEqualTo(-3400);
     }
 }
