@@ -30,4 +30,24 @@ class OrderTest {
         //then
         assertThat(exception.getMessage()).isEqualTo(ExceptionMessage.INVALID_ORDER.get());
     }
+
+    @DisplayName("총 메뉴 개수가 20개가 넘는다면 예외가 발생한다.")
+    @Test
+    void validateTotalMenuCount() {
+        //given
+        List<OrderedFood> orderedFoods = List.of(
+                new OrderedFood("제로콜라", 19),
+                new OrderedFood("시저샐러드", 3)
+        );
+
+        LocalDate visitDate = LocalDate.of(2023, 12, 2);
+
+        //when
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()-> {
+            new Order(visitDate, orderedFoods);
+        });
+
+        //then
+        assertThat(exception.getMessage()).isEqualTo(ExceptionMessage.INVALID_ORDER.get());
+    }
 }

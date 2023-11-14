@@ -38,4 +38,8 @@ public class OrderedFood {
     public Object getName() {
         return food.getName();
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }

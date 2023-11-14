@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static christmas.constans.Constants.MAX_QUANTITY;
 import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 
 public class Order {
@@ -20,6 +21,7 @@ public class Order {
 
     private void validate(List<OrderedFood> orderedFoods) {
         validateDuplicateMenu(orderedFoods);
+        validateTotalMenuCount(orderedFoods);
     }
 
     private void validateDuplicateMenu(List<OrderedFood> orderedFoods) {
@@ -32,6 +34,15 @@ public class Order {
         }
     }
 
+    private void validateTotalMenuCount(List<OrderedFood> orderedFoods) {
+        int totalMenuCount = orderedFoods.stream()
+                .mapToInt(OrderedFood::getQuantity)
+                .sum();
+
+        if (totalMenuCount > MAX_QUANTITY) {
+            throw new IllegalArgumentException(INVALID_ORDER.get());
+        }
+    }
 
     public void addOrderedItem(OrderedFood orderedFood) {
         orderedFoods.add(orderedFood);
