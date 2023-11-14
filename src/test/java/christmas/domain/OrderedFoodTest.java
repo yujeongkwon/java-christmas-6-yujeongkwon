@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -34,5 +37,29 @@ class OrderedFoodTest {
 
         //then
         assertThat(exception.getMessage()).isEqualTo(ExceptionMessage.INVALID_ORDER.get());
+    }
+
+    @DisplayName("할인 가능 금액 확인")
+    @Test
+    void isAvailableDiscount() {
+        //given
+        List<OrderedFood> orderedFoods = List.of(
+                new OrderedFood("아이스크림", 1)
+        );
+        List<OrderedFood> orderedFoods2 = List.of(
+                new OrderedFood("아이스크림", 2)
+        );
+
+        LocalDate visitDate = LocalDate.of(2023, 12, 2);
+        Order order = new Order(visitDate, orderedFoods);
+        Order order2 = new Order(visitDate, orderedFoods2);
+
+        //when
+        boolean result = order.isAvailableDiscount();
+        boolean result2 = order2.isAvailableDiscount();
+
+        //then
+        assertThat(result).isFalse();
+        assertThat(result2).isTrue();
     }
 }

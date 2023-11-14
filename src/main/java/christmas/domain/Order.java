@@ -10,6 +10,8 @@ import static christmas.constans.Constants.MAX_QUANTITY;
 import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 
 public class Order {
+    private static final int AVAILABLE_DISCOUNT_MIN_AMOUNT= 10000;
+
     private LocalDate visitDate;
     private List<OrderedFood> orderedFoods = new ArrayList<>();
 
@@ -17,6 +19,10 @@ public class Order {
         validate(orderedFoods);
         this.visitDate = visitDate;
         this.orderedFoods = orderedFoods;
+    }
+
+    public boolean isAvailableDiscount(){
+        return getTotalPrice() >= AVAILABLE_DISCOUNT_MIN_AMOUNT;
     }
 
     public int getTotalPrice(){
