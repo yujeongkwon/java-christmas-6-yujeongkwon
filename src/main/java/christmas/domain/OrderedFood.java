@@ -3,9 +3,12 @@ package christmas.domain;
 
 import java.util.Optional;
 
+import static christmas.constans.Constants.MAX_QUANTITY;
+import static christmas.constans.Constants.MIN_QUANTITY;
 import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 
 public class OrderedFood {
+
     private Food food;
     private int quantity;
 
@@ -15,6 +18,10 @@ public class OrderedFood {
     }
 
     private int validateQuantity(int quantity) {
+        if (quantity < MIN_QUANTITY || quantity > MAX_QUANTITY){
+            throw new IllegalArgumentException(INVALID_ORDER.get());
+        }
+
         return quantity;
     }
 
