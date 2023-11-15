@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.EventBadge;
 import christmas.domain.GiftMenu;
 import christmas.domain.Order;
 
@@ -16,6 +17,8 @@ public class OutputView {
     private static final String DISCOUNT_BENEFITS_HEADER = "<혜택 내역>";
     private static final String TOTAL_BENEFITS_HEADER = "<총혜택 금액>";
     private static final String FINAL_PRICE_HEADER = "<할인 후 예상 결제 금액>";
+
+    private static final String EVENT_BADGE_HEADER = "<12월 이벤트 배지>";
 
     public static void printException(Exception exception) {
         System.out.println(exception.getMessage());
@@ -70,5 +73,11 @@ public class OutputView {
     public static void printFinalPrice(int finalPrice) {
         System.out.println(FINAL_PRICE_HEADER);
         System.out.println(String.format("%,d원\n", finalPrice));
+    }
+
+    public static void printEventBadge(Optional<EventBadge> eventBadge) {
+        System.out.println(EVENT_BADGE_HEADER);
+        eventBadge.map(EventBadge::getBadgeName)
+                .ifPresentOrElse(System.out::println, () -> System.out.println("없음"));
     }
 }
