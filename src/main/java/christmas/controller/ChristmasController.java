@@ -1,8 +1,8 @@
 package christmas.controller;
 
 
-import christmas.domain.Order;
-import christmas.domain.OrderedFood;
+import christmas.domain.*;
+import christmas.service.ChristmasService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -53,7 +53,7 @@ public class ChristmasController {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_ORDER.get());
+            throw new IllegalArgumentException(INVALID_DATE.get());
         }
     }
 
@@ -62,12 +62,24 @@ public class ChristmasController {
 
         String[] orders = orderInput.split(ORDER_DELIMITER);
         for (String order : orders) {
-            String[] parts = order.split(FOOD_QUANTITY_DELIMITER);
-            String foodName = parts[0].trim();
-            int quantity = Integer.parseInt(parts[1].trim());
-            orderedFoods.add(new OrderedFood(foodName,quantity));
+            orderedFoods.add(processOrderedFood(order));
         }
 
         return orderedFoods;
+    }
+
+    private OrderedFood processOrderedFood(String order) {
+        String[] parts = order.split(FOOD_QUANTITY_DELIMITER);
+        String foodName = parts[0].trim();
+        int quantity = convertOrderedQuantityInputToInt(parts[1].trim());
+        return new OrderedFood(foodName,quantity);
+    }
+
+    private int convertOrderedQuantityInputToInt(final String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_ORDER.get());
+        }
     }
 }
