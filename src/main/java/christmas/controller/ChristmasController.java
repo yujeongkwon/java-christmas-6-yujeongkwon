@@ -9,24 +9,57 @@ import christmas.view.OutputView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+import static christmas.constans.ExceptionMessage.INVALID_DATE;
 import static christmas.constans.ExceptionMessage.INVALID_ORDER;
 
 public class ChristmasController {
     private static final String ORDER_DELIMITER = ",";
     private static final String FOOD_QUANTITY_DELIMITER = "-";
 
-
+    private ChristmasService christmasService = new ChristmasService();
     private LocalDate visitDate;
     private Order order;
+    private Optional<GiftMenu> giftMenu;
+    private int totalBenefits;
+    private int finalPrice;
 
     public void start() {
         set();
+        EventPlanner();
+        getPlannerResult();
     }
 
     private void set(){
+        OutputView.printWelcomeMessage();
         visitDate = readVisitDate();
         order = readOrder();
+    }
+
+    private void EventPlanner() {
+        int totalPrice = order.getTotalPrice();
+
+        Map<String, Integer> allDiscountBenefits = christmasService.getAllDiscountBenefits(visitDate, order);
+        giftMenu = GiftMenu.find(totalPrice);
+
+        int totalDiscountPrice = BenefitCalculator.getTotalDiscountPrice(allDiscountBenefits);
+
+        totalBenefits = BenefitCalculator.getTotalBenefits(totalDiscountPrice, giftMenu);
+        finalPrice = BenefitCalculator.getFinalPrice(totalPrice, totalDiscountPrice);
+    }
+
+
+    private void getPlannerResult() {
+        OutputView.printEventPreview(visitDate);
+        OutputView.printOrderedMenu(order);
+        OutputView.printTotalPrice(order.getTotalPrice());
+        OutputView.printGiftMenu(giftMenu);
+        OutputView.printDiscountBenefits(christmasService.getAllDiscountBenefits(visitDate, order));
+        OutputView.printTotalBenefits(totalBenefits);
+        OutputView.printFinalPrice(totalBenefits);
+        OutputView.printEventBadge(EventBadge.find(totalBenefits));
     }
 
     private LocalDate readVisitDate() {
