@@ -24,7 +24,7 @@ public class ChristmasService {
         return discountStrategies.stream()
                 .filter(discountStrategy -> discountStrategy.isApplicable(visitDate, order))
                 .collect(Collectors.toMap(
-                        discountStrategy -> discountStrategy.getClass().getSimpleName(),
+                        DiscountStrategy::getRuleName,
                         discountStrategy -> discountStrategy.calculateDiscount(visitDate, order)
                 ));
     }

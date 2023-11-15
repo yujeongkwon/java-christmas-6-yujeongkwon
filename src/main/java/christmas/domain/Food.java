@@ -1,8 +1,8 @@
 package christmas.domain;
 
 public class Food {
-    private String name;
-    private int price;
+    private final String name;
+    private final int price;
 
     public Food(String name, int price) {
         this.name = name;
@@ -13,7 +13,7 @@ public class Food {
         return name;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return price;
     }
 }

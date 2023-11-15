@@ -9,7 +9,7 @@ public class BenefitCalculator {
         return totalDiscountPrice + giftBenefits;
     }
 
-    public static int getFinalPrice(int totalPrice, int totalDiscounted){
+    public static int getFinalPrice(int totalPrice, int totalDiscounted) {
         return totalPrice - totalDiscounted;
     }
 

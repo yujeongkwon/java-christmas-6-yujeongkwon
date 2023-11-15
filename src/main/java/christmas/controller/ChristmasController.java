@@ -19,7 +19,7 @@ public class ChristmasController {
     private static final String ORDER_DELIMITER = ",";
     private static final String FOOD_QUANTITY_DELIMITER = "-";
 
-    private ChristmasService christmasService = new ChristmasService();
+    private final ChristmasService christmasService = new ChristmasService();
     private LocalDate visitDate;
     private Order order;
     private Optional<GiftMenu> giftMenu;
@@ -32,7 +32,7 @@ public class ChristmasController {
         getPlannerResult();
     }
 
-    private void set(){
+    private void set() {
         OutputView.printWelcomeMessage();
         visitDate = readVisitDate();
         order = readOrder();
@@ -56,16 +56,16 @@ public class ChristmasController {
         OutputView.printOrderedMenu(order);
         OutputView.printTotalPrice(order.getTotalPrice());
         OutputView.printGiftMenu(giftMenu);
-        OutputView.printDiscountBenefits(christmasService.getAllDiscountBenefits(visitDate, order));
+        OutputView.printBenefits(christmasService.getAllDiscountBenefits(visitDate, order),giftMenu);
         OutputView.printTotalBenefits(totalBenefits);
-        OutputView.printFinalPrice(totalBenefits);
+        OutputView.printFinalPrice(finalPrice);
         OutputView.printEventBadge(EventBadge.find(totalBenefits));
     }
 
     private LocalDate readVisitDate() {
         try {
             int input = convertVisitDateInputToInt(InputView.readVisitDate());
-            return LocalDate.of(2023,12,input);
+            return LocalDate.of(2023, 12, input);
         } catch (IllegalArgumentException e) {
             OutputView.printException(e);
             return readVisitDate();
@@ -90,12 +90,12 @@ public class ChristmasController {
         }
     }
 
-    private List<OrderedFood> processOrder(String orderInput){
+    private List<OrderedFood> processOrder(String orderInput) {
         List<OrderedFood> orderedFoods = new ArrayList<>();
 
         String[] orders = orderInput.split(ORDER_DELIMITER);
-        for (String order : orders) {
-            orderedFoods.add(processOrderedFood(order));
+        for (String eachOrder : orders) {
+            orderedFoods.add(processOrderedFood(eachOrder));
         }
 
         return orderedFoods;
@@ -105,7 +105,7 @@ public class ChristmasController {
         String[] parts = order.split(FOOD_QUANTITY_DELIMITER);
         String foodName = parts[0].trim();
         int quantity = convertOrderedQuantityInputToInt(parts[1].trim());
-        return new OrderedFood(foodName,quantity);
+        return new OrderedFood(foodName, quantity);
     }
 
     private int convertOrderedQuantityInputToInt(final String input) {

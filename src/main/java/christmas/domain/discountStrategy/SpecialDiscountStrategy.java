@@ -5,7 +5,6 @@ import christmas.domain.Order;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Month;
 
 public class SpecialDiscountStrategy implements DiscountStrategy {
     private static final int SPECIAL_DISCOUNT_AMOUNT = 1000;

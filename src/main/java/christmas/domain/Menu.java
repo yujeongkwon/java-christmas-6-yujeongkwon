@@ -28,9 +28,6 @@ public enum Menu {
             new Food("샴페인", 25000)
     ));
 
-    private String categoryName;
-    private List<Food> foods;
-
     private static final Map<String, Menu> foodToMenu = new HashMap<>();
 
     static {
@@ -41,13 +38,16 @@ public enum Menu {
         }
     }
 
+    private final String categoryName;
+    private final List<Food> foods;
+
     Menu(String categoryName, List<Food> foods) {
         this.categoryName = categoryName;
         this.foods = foods;
     }
 
     public static Optional<Food> findFoodByName(String foodName) {
-        if (!foodToMenu.containsKey(foodName)){
+        if (!foodToMenu.containsKey(foodName)) {
             return Optional.empty();
         }
 
@@ -61,7 +61,7 @@ public enum Menu {
         return foodToMenu.get(foodName);
     }
 
-    public String getCategoryName(){
+    public String getCategoryName() {
         return categoryName;
     }
 }

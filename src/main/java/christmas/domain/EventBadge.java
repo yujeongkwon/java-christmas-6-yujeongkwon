@@ -8,21 +8,21 @@ public enum EventBadge {
     TREE("트리", 10000),
     STAR("별", 5000);
 
-    private String badgeName;
-    private int beneficialAmount;
+    private final String badgeName;
+    private final int beneficialAmount;
 
     EventBadge(String badgeName, int benefitAmount) {
         this.badgeName = badgeName;
         this.beneficialAmount = benefitAmount;
     }
 
-    public String getBadgeName() {
-        return badgeName;
-    }
-
     public static Optional<EventBadge> find(int totalBenefitAmount) {
         return Arrays.stream(values())
                 .filter(badge -> totalBenefitAmount >= badge.beneficialAmount)
                 .findFirst();
+    }
+
+    public String getBadgeName() {
+        return badgeName;
     }
 }
