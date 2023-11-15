@@ -37,9 +37,9 @@ class BenefitCalculatorTest {
         //given
         Map<String, Integer> discountedInfo = christmasService.getAllDiscountBenefits(localDate,order);
         Optional<GiftMenu> giftMenu = GiftMenu.find(order.getTotalPrice());
-
+        int totalDiscountPrice = BenefitCalculator.getTotalDiscountPrice(discountedInfo);
         //when
-        int result = BenefitCalculator.calculateTotalBenefits(discountedInfo,giftMenu);
+        int result = BenefitCalculator.getTotalBenefits(totalDiscountPrice,giftMenu);
 
         //then
         assertThat(result).isEqualTo(33446);
