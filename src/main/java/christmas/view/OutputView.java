@@ -1,14 +1,17 @@
 package christmas.view;
 
+import christmas.domain.GiftMenu;
 import christmas.domain.Order;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static christmas.constans.Constants.EVENT_MONTH;
 
 public class OutputView {
     private static final String ORDER_MENU_HEADER = "<주문 메뉴>";
     private static final String TOTAL_PRICE_HEADER = "<할인 전 총주문 금액>";
+    private static final String GIFT_MENU_HEADER = "<증정 메뉴>";
 
     public static void printException(Exception exception) {
         System.out.println(exception.getMessage());
@@ -32,5 +35,13 @@ public class OutputView {
     public static void printTotalPrice(int totalPrice) {
         System.out.println(TOTAL_PRICE_HEADER);
         System.out.println(String.format("%,d원\n", totalPrice));
+    }
+
+    public static void printGiftMenu(Optional<GiftMenu> giftMenu) {
+        System.out.println(GIFT_MENU_HEADER);
+        giftMenu.ifPresentOrElse(
+                menu -> System.out.println(menu.getGiftName() + " " + menu.getPrice() + "개"),
+                () -> System.out.println("없음")
+        );
     }
 }
