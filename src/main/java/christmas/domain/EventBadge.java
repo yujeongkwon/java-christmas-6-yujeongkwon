@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum EventBadge {
     SANTA("산타", 20000),
@@ -19,10 +20,9 @@ public enum EventBadge {
         return badgeName;
     }
 
-    public static  EventBadge find(int totalBenefitAmount) {
+    public static Optional<EventBadge> find(int totalBenefitAmount) {
         return Arrays.stream(values())
                 .filter(badge -> totalBenefitAmount >= badge.beneficialAmount)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }
