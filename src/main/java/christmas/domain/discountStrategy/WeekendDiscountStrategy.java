@@ -19,7 +19,7 @@ public class WeekendDiscountStrategy implements DiscountStrategy {
     @Override
     public int calculateDiscount(LocalDate visitDate, Order order) {
         int discountAmountPerItem = WEEKEND_DISCOUNT_AMOUNT * order.getMainMenuCount();
-        return -(discountAmountPerItem);
+        return discountAmountPerItem;
     }
 
     @Override

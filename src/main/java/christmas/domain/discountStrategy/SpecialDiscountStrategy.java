@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class SpecialDiscountStrategy implements DiscountStrategy {
-    private static final int SPECIAL_DISCOUNT_AMOUNT = -1000;
+    private static final int SPECIAL_DISCOUNT_AMOUNT = 1000;
     private static final int CHRISTMAS_DAY = 25;
 
     @Override

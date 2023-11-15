@@ -40,6 +40,6 @@ class ChristmasDayDiscountStrategyTest {
             result = christmasDayDiscountStrategy.calculateDiscount(localDate, order);
         }
         //then
-        assertThat(result).isEqualTo(-3400);
+        assertThat(result).isEqualTo(3400);
     }
 }

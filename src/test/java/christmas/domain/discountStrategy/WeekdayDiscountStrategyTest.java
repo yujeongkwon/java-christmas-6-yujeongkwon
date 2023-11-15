@@ -39,6 +39,6 @@ class WeekdayDiscountStrategyTest {
         int result = weekdayDiscountStrategy.calculateDiscount(localDate, order);
 
         //then
-        assertThat(result).isEqualTo(-4046);
+        assertThat(result).isEqualTo(4046);
     }
 }

@@ -18,7 +18,7 @@ public class WeekdayDiscountStrategy implements DiscountStrategy {
     @Override
     public int calculateDiscount(LocalDate visitDate, Order order) {
         int dessertCount = order.getDessertMenuCount();
-        return -(dessertCount * DISCOUNT_AMOUNT_PER_DESSERT);
+        return dessertCount * DISCOUNT_AMOUNT_PER_DESSERT;
     }
 
     @Override

@@ -17,7 +17,7 @@ class ChristmasDayDiscountStrategy implements DiscountStrategy {
     @Override
     public int calculateDiscount(LocalDate visitDate, Order order) {
         int elapsedDays = visitDate.getDayOfMonth() - 1;
-        return  - (START_DISCOUNT_AMOUNT + (100 * elapsedDays));
+        return  START_DISCOUNT_AMOUNT + (100 * elapsedDays);
     }
 
     @Override
