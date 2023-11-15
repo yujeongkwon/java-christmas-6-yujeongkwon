@@ -63,6 +63,7 @@ public class OutputView {
         }
 
         System.out.println("없음");
+        System.out.println("");
     }
 
     public static void printTotalBenefits(int totalBenefits) {
