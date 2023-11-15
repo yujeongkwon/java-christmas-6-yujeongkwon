@@ -25,16 +25,35 @@ public class OrderValidator {
     }
 
     private static List<OrderedFood> processOrder(String orderInput) {
+        validateNotEmpty(orderInput);
+
         return Arrays.stream(orderInput.split(ORDER_DELIMITER))
                 .map(OrderValidator::processOrderedFood)
                 .toList();
     }
 
+    private static void validateNotEmpty(String orderInput) {
+        if (orderInput.trim().isEmpty()) {
+            throw new IllegalArgumentException(INVALID_ORDER.get());
+        }
+    }
+
     private static OrderedFood processOrderedFood(String order) {
+        validateOrderFormat(order);
         String[] parts = order.split(FOOD_QUANTITY_DELIMITER);
         String foodName = parts[0].trim();
         int quantity = convertOrderedQuantityInputToInt(parts[1].trim());
         return new OrderedFood(foodName, quantity);
+    }
+
+    private static void validateOrderFormat(String order) {
+        if (!isValidOrderFormat(order)) {
+            throw new IllegalArgumentException(INVALID_ORDER.get());
+        }
+    }
+
+    private static boolean isValidOrderFormat(String order) {
+        return order.matches("\\s*[^-]+\\s*-\\s*\\d+\\s*");
     }
 
     private static int convertOrderedQuantityInputToInt(final String input) {
