@@ -81,8 +81,8 @@ class OrderTest {
 
         //then
         assertThat(result).isEqualTo(
-                Menu.findFoodByName("제로콜라").get().getPrice() * 10
-                + Menu.findFoodByName("레드와인").get().getPrice() * 3
-                + Menu.findFoodByName("시저샐러드").get().getPrice() * 3);
+                Menu.findFoodByName("제로콜라").get().price() * 10
+                + Menu.findFoodByName("레드와인").get().price() * 3
+                + Menu.findFoodByName("시저샐러드").get().price() * 3);
     }
 }

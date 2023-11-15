@@ -33,7 +33,7 @@ public enum Menu {
     static {
         for (Menu menu : Menu.values()) {
             for (Food food : menu.foods) {
-                foodToMenu.put(food.getName(), menu);
+                foodToMenu.put(food.name(), menu);
             }
         }
     }
@@ -53,7 +53,7 @@ public enum Menu {
 
         return Stream.of(Menu.values())
                 .flatMap(menu -> menu.foods.stream())
-                .filter(food -> food.getName().equalsIgnoreCase(foodName))
+                .filter(food -> food.name().equalsIgnoreCase(foodName))
                 .findFirst();
     }
 

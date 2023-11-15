@@ -36,11 +36,11 @@ public class OrderedFood {
     }
 
     public int getFoodsPrice() {
-        return food.getPrice() * quantity;
+        return food.price() * quantity;
     }
 
     public Object getName() {
-        return food.getName();
+        return food.name();
     }
 
     public int getQuantity() {
