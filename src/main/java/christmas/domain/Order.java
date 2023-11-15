@@ -42,6 +42,10 @@ public class Order {
                 .sum();
     }
 
+    public List<OrderedFood> getOrderedFoods() {
+        return orderedFoods;
+    }
+
     private void validate(List<OrderedFood> orderedFoods) {
         validateDuplicateMenu(orderedFoods);
         validateTotalMenuCount(orderedFoods);
