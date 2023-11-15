@@ -4,6 +4,7 @@ import christmas.domain.GiftMenu;
 import christmas.domain.Order;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 import static christmas.constans.Constants.EVENT_MONTH;
@@ -12,6 +13,7 @@ public class OutputView {
     private static final String ORDER_MENU_HEADER = "<주문 메뉴>";
     private static final String TOTAL_PRICE_HEADER = "<할인 전 총주문 금액>";
     private static final String GIFT_MENU_HEADER = "<증정 메뉴>";
+    private static final String DISCOUNT_BENEFITS_HEADER = "<혜택 내역>";
 
     public static void printException(Exception exception) {
         System.out.println(exception.getMessage());
@@ -43,5 +45,11 @@ public class OutputView {
                 menu -> System.out.println(menu.getGiftName() + " " + menu.getPrice() + "개"),
                 () -> System.out.println("없음")
         );
+    }
+
+    public static void printDiscountBenefits(Map<String, Integer> discountBenefits) {
+        System.out.println(DISCOUNT_BENEFITS_HEADER);
+        discountBenefits.forEach((strategy, amount) ->
+                System.out.println(strategy + ": -" + String.format("%,d원", amount)));
     }
 }
