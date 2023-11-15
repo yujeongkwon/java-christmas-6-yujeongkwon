@@ -4,13 +4,16 @@ import java.util.Map;
 import java.util.Optional;
 
 public class BenefitCalculator {
-    public static int calculateTotalBenefits(Map<String, Integer> discountedInfo, Optional<GiftMenu> giftMenu) {
-        int discountBenefits = discountedInfo.values().stream().mapToInt(Integer::intValue).sum();
+    public static int getTotalBenefits(int totalDiscountPrice, Optional<GiftMenu> giftMenu) {
         int giftBenefits = giftMenu.map(GiftMenu::getPrice).orElse(0);
-        return discountBenefits + giftBenefits;
+        return totalDiscountPrice + giftBenefits;
     }
 
-    public static int calculateDiscountedAmount(int totalPrice, int totalDiscounted){
+    public static int getFinalPrice(int totalPrice, int totalDiscounted){
         return totalPrice - totalDiscounted;
+    }
+
+    public static int getTotalDiscountPrice(Map<String, Integer> discountedInfo) {
+        return discountedInfo.values().stream().mapToInt(Integer::intValue).sum();
     }
 }
