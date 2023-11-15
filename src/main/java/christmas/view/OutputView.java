@@ -14,6 +14,7 @@ public class OutputView {
     private static final String TOTAL_PRICE_HEADER = "<할인 전 총주문 금액>";
     private static final String GIFT_MENU_HEADER = "<증정 메뉴>";
     private static final String DISCOUNT_BENEFITS_HEADER = "<혜택 내역>";
+    private static final String TOTAL_BENEFITS_HEADER = "<총혜택 금액>";
 
     public static void printException(Exception exception) {
         System.out.println(exception.getMessage());
@@ -51,5 +52,10 @@ public class OutputView {
         System.out.println(DISCOUNT_BENEFITS_HEADER);
         discountBenefits.forEach((strategy, amount) ->
                 System.out.println(strategy + ": -" + String.format("%,d원", amount)));
+    }
+
+    public static void printTotalBenefits(int totalBenefits) {
+        System.out.println(TOTAL_BENEFITS_HEADER);
+        System.out.printf("%,d원\n", totalBenefits);
     }
 }
