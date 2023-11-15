@@ -7,12 +7,13 @@ import java.time.LocalDate;
 
 public class WeekdayDiscountStrategy implements DiscountStrategy {
     private static final int DISCOUNT_AMOUNT_PER_DESSERT = 2023;
-    private static final DayOfWeek START_WEEKDAY = DayOfWeek.SUNDAY;
-    private static final DayOfWeek END_WEEKDAY = DayOfWeek.THURSDAY;
+    //일요일이 1부터
+    private static final int START_WEEKDAY = DayOfWeek.SUNDAY.getValue() % 7 + 1;
+    private static final int END_WEEKDAY = DayOfWeek.THURSDAY.getValue() % 7 + 1;
 
     @Override
     public boolean isApplicable(LocalDate visitDate, Order order) {
-        return isWeekday(visitDate) && (order.getDessertMenuCount() > 1);
+        return isWeekday(visitDate) && (order.getDessertMenuCount() > 0);
     }
 
     @Override
@@ -27,8 +28,9 @@ public class WeekdayDiscountStrategy implements DiscountStrategy {
     }
 
     private boolean isWeekday(LocalDate date) {
-        DayOfWeek dayOfWeek = date.getDayOfWeek();
-        return dayOfWeek.compareTo(START_WEEKDAY) >= 0 && dayOfWeek.compareTo(END_WEEKDAY) <= 0;
+        int dayValue = date.getDayOfWeek().getValue() % 7 + 1;
+
+        return dayValue >= START_WEEKDAY && dayValue <= END_WEEKDAY;
     }
 
 

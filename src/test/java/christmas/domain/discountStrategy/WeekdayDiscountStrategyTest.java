@@ -18,7 +18,7 @@ class WeekdayDiscountStrategyTest {
 
     @BeforeEach
     void setup(){
-        localDate = LocalDate.of(2023,12,3);
+        localDate = LocalDate.of(2023,12,7);
 
         List<OrderedFood> orderedFoods = List.of(
                 new OrderedFood("초코케이크", 2),
@@ -36,8 +36,10 @@ class WeekdayDiscountStrategyTest {
         WeekdayDiscountStrategy weekdayDiscountStrategy = new WeekdayDiscountStrategy();
 
         //when
-        int result = weekdayDiscountStrategy.calculateDiscount(localDate, order);
-
+        int result = 0;
+        if (weekdayDiscountStrategy.isApplicable(localDate, order)){
+            result = result = weekdayDiscountStrategy.calculateDiscount(localDate, order);
+        }
         //then
         assertThat(result).isEqualTo(4046);
     }
