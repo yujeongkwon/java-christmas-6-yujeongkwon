@@ -47,21 +47,28 @@ public class OutputView {
                 menu -> System.out.println(menu.getGiftName() + " " + menu.getPrice() + "개"),
                 () -> System.out.println("없음")
         );
+        System.out.println("");
     }
 
     public static void printDiscountBenefits(Map<String, Integer> discountBenefits) {
         System.out.println(DISCOUNT_BENEFITS_HEADER);
-        discountBenefits.forEach((strategy, amount) ->
-                System.out.println(strategy + ": -" + String.format("%,d원", amount)));
+
+        if (!discountBenefits.isEmpty()) {
+            discountBenefits.entrySet().stream()
+                    .map(entry -> entry.getKey() + ": -" + String.format("%,d원", entry.getValue()))
+                    .forEach(System.out::println);
+        }
+
+        System.out.println("없음");
     }
 
     public static void printTotalBenefits(int totalBenefits) {
         System.out.println(TOTAL_BENEFITS_HEADER);
-        System.out.printf("%,d원\n", totalBenefits);
+        System.out.println(String.format("%,d원\n", totalBenefits));
     }
 
     public static void printFinalPrice(int finalPrice) {
         System.out.println(FINAL_PRICE_HEADER);
-        System.out.printf("%,d원\n", finalPrice);
+        System.out.println(String.format("%,d원\n", finalPrice));
     }
 }
