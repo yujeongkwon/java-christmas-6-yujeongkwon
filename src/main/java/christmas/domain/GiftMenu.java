@@ -24,7 +24,7 @@ public enum GiftMenu {
         return price;
     }
 
-    public Optional<GiftMenu> find(int totalBenefitAmount) {
+    public static Optional<GiftMenu> find(int totalBenefitAmount) {
         return Arrays.stream(values())
                 .filter(giftMenu -> totalBenefitAmount >= giftMenu.beneficialAmount)
                 .findFirst();

@@ -5,7 +5,7 @@ import christmas.domain.Order;
 
 import java.time.LocalDate;
 
-class ChristmasDayDiscountStrategy implements DiscountStrategy {
+public class ChristmasDayDiscountStrategy implements DiscountStrategy {
     private static final int START_DISCOUNT_AMOUNT = 1000;
     private static final LocalDate CHRISTMAS_DAY = LocalDate.of(2023, 12, 25);
 
